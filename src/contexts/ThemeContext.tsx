@@ -1,6 +1,6 @@
 import { createContext, useMemo, useState, useContext } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material';
-// import { themePalette } from '../theme';
+import { colorPalette } from '../theme';
 
 interface ThemeInterface {
     toggleTheme: () => void;
@@ -26,14 +26,9 @@ export const ModeProvider = ({ children }: ModeProps) => {
     }), [mode]);
 
     const themePalette = createTheme({
-        palette: {
-            mode,
-            primary: { main: '#fff', },
-            secondary: { main: '#000' },
-            background: { default: '', },
-        },
+        palette: { mode, colorPalette(mode) },
         typography: {
-            fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+            fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
             fontSize: 12,
             h3: { fontFamily: '' }
         }
@@ -46,5 +41,3 @@ export const ModeProvider = ({ children }: ModeProps) => {
         </ThemeContext.Provider>
     )
 };
-
-export const useTheme = () => useContext(ThemeContext);
